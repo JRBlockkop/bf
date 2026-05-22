@@ -1,4 +1,5 @@
 const bf = {
+    stack: [],
     mem: Array(32768).fill(0),
     out: "",
     p: 0,
@@ -10,11 +11,15 @@ const bf = {
         }
     },
     run: (code)=>{
+        bf.stack = [];
         bf.out = "";
-        
-        for (let i = 0; i < code.length; i++) {
+        let i = 0;
+
+        while ( i < code.length) {
             const c = code[i];
-            console.log(c);
+
+            console.log(i,bf.p,c,bf.mem[bf.p],bf.out)
+
             if(c == ">"){bf.p = (bf.p+1+32768) % 32768}
             if(c == "<"){bf.p = (bf.p-1+32768) % 32768}
 
@@ -22,6 +27,11 @@ const bf = {
             if(c == "-"){bf.mem[bf.p] = (bf.mem[bf.p]-1+256)%256}
 
             if(c == "."){bf.out += String.fromCharCode(bf.mem[bf.p])}
+
+            if(c == "["){if(bf.mem[bf.p]!=0){bf.stack.push(i)}}
+            if(c == "]"){if(bf.mem[bf.p]!=0){i = bf.stack[bf.stack.length-1]}else{bf.stack.pop()}}
+
+            i++
         }
     }
 }

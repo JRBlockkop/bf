@@ -5,9 +5,10 @@ const bf = require('./bf');
 net.createServer((c) => {
     c.on('data',(d)=> {
         const dh = d.toString('hex');
-        console.log(dh)
+        console.log(dh);
         bf.load(dh);
-        bf.run(fs.readFileSync('./os.bf').toString())
+        bf.run(fs.readFileSync('./os.bf').toString());
+        console.log(bf.out);
         c.write(bf.out);
     })
-}).listen(25565)
+}).listen(25565);
