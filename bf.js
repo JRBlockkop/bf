@@ -6,7 +6,7 @@ const bf = {
     load:(dh)=>{
         bf.mem = Array(32768).fill(0);
         bf.p = 0;
-        for (let i = 0; i < dh.length; i++) {
+        for (let i = 0; i < dh.length/2; i++) {
             bf.mem[i] = Number('0x'+dh[2*i]+dh[2*i+1]);
         }
     },
