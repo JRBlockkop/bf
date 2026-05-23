@@ -18,7 +18,7 @@ const bf = {
         while ( i < code.length) {
             const c = code[i];
 
-            console.log(i,bf.p,c,bf.mem[bf.p],bf.out)
+            //console.log(i,bf.p,c,bf.mem[bf.p],bf.out)
 
             if(c == ">"){bf.p = (bf.p+1+32768) % 32768}
             if(c == "<"){bf.p = (bf.p-1+32768) % 32768}
@@ -28,7 +28,7 @@ const bf = {
 
             if(c == "."){bf.out += String.fromCharCode(bf.mem[bf.p])}
 
-            if(c == "["){if(bf.mem[bf.p]!=0){bf.stack.push(i)}}
+            if(c == "["){if(bf.mem[bf.p]!=0){bf.stack.push(i)}else {let depth = 1;while (depth > 0 && ++i < code.length) {if (code[i] == "[") depth++;if (code[i] == "]") depth--;}}}
             if(c == "]"){if(bf.mem[bf.p]!=0){i = bf.stack[bf.stack.length-1]}else{bf.stack.pop()}}
 
             i++
