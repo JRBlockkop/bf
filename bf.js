@@ -27,6 +27,7 @@ const bf = {
             if(c == "-"){bf.mem[bf.p] = (bf.mem[bf.p]-1+256)%256}
 
             if(c == "."){bf.out += String.fromCharCode(bf.mem[bf.p])}
+            if(c == ","){console.log(i,bf.p,c,bf.mem[bf.p],bf.out,Buffer.from(bf.out).toString('hex'))}
 
             if(c == "["){if(bf.mem[bf.p]!=0){bf.stack.push(i)}else {let depth = 1;while (depth > 0 && ++i < code.length) {if (code[i] == "[") depth++;if (code[i] == "]") depth--;}}}
             if(c == "]"){if(bf.mem[bf.p]!=0){i = bf.stack[bf.stack.length-1]}else{bf.stack.pop()}}
